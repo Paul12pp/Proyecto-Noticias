@@ -12,6 +12,7 @@ namespace Proyecto_Noticias.Controllers
     {
         public IActionResult Index()
         {
+            // para el cambio
             return View();
         }
 
