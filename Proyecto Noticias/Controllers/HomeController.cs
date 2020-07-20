@@ -4,12 +4,18 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Proyecto_Noticias.Data;
 using Proyecto_Noticias.Models;
 
 namespace Proyecto_Noticias.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly AppDbContext _appDbContext;
+        public HomeController(AppDbContext appDbContext)
+        {
+            _appDbContext = appDbContext;
+        }
         public IActionResult Index()
         {
             // para el cambio
