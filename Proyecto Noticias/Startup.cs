@@ -39,7 +39,7 @@ namespace Proyecto_Noticias
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, AppDbContext context)
         {
             if (env.IsDevelopment())
             {
@@ -50,6 +50,8 @@ namespace Proyecto_Noticias
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+            //Seed de data inicial
+            DbSeed.SeedData(context);
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

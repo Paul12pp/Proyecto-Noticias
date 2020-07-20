@@ -5,20 +5,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Proyecto_Noticias.Data;
+using Proyecto_Noticias.Interface;
 using Proyecto_Noticias.Models;
 
 namespace Proyecto_Noticias.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly AppDbContext _appDbContext;
-        public HomeController(AppDbContext appDbContext)
+        // interfaces de los modelos e injecion 
+        // como parametro en el controlador
+        private readonly IComentario _comentario;
+        private readonly INoticia _noticia;
+        public HomeController(INoticia noticia, IComentario comentario)
         {
-            _appDbContext = appDbContext;
+            _comentario = comentario;
+            _noticia = noticia;
         }
         public IActionResult Index()
         {
-            // para el cambio
+            // prueba de la interfaces
+            _noticia.GetAllNoticias();
             return View();
         }
 
