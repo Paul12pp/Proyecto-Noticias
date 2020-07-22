@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Proyecto_Noticias.Data;
+using Proyecto_Noticias.Interface;
 
 namespace Proyecto_Noticias
 {
@@ -36,6 +37,8 @@ namespace Proyecto_Noticias
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<AppDbContext>(item => item.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<INoticia, NoticiaRepository>();
+            services.AddScoped<IComentario, ComentarioRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
