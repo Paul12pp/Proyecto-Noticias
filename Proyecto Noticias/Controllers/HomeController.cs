@@ -24,7 +24,7 @@ namespace Proyecto_Noticias.Controllers
         public IActionResult Index()
         {
             // prueba de la interfaces
-            _noticia.GetAllNoticias();
+            var noticia = _noticia.GetAllNoticias();
             return View();
         }
 
