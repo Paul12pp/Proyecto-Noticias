@@ -57,7 +57,7 @@ namespace Proyecto_Noticias.Interface
 
         public IEnumerable<Noticia> GetAllNoticias()
         {
-            return _appDbContext.Noticias;
+            return _appDbContext.Noticias.ToList();
         }
 
         public Noticia GetNoticiaById(int noticiaId)
@@ -84,6 +84,7 @@ namespace Proyecto_Noticias.Interface
                 {
                     noticia.Like = value ? noticia.Like += 1 : noticia.Like;
                     noticia.Dislike = !value ? noticia.Dislike += 1 : noticia.Dislike;
+                    _appDbContext.SaveChanges();
                 }
                 return 200;
             }
