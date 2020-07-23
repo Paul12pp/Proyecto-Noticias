@@ -10,9 +10,6 @@ namespace ProyectoNoticias.Migrations
                 name: "FK_Comentarios_Noticias_NoticiaId",
                 table: "Comentarios");
 
-            migrationBuilder.DropColumn(
-                name: "IdNoticia",
-                table: "Comentarios");
 
             migrationBuilder.AddColumn<string>(
                 name: "Categoria",
