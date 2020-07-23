@@ -111,3 +111,12 @@ form.formulario_comentario {
 h5.error{
     color:red;
 }
+
+.categoria{
+    background-color:antiquewhite;
+    color:gray;
+    font-weight:bold;
+    padding:2px;
+    display:inline;
+    border-radius:10px;
+}

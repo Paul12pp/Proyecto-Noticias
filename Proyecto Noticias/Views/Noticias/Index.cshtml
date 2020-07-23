@@ -27,12 +27,13 @@
                 <li class="estilo02">
                     @if (noticia.Resumen.Length > 97)
                     {
-                        @(noticia.Resumen.Substring(0, 100) + "...")
+                        <p>@(noticia.Resumen.Substring(0, 100) + "...") <span class="glyphicon glyphicon-calendar" /> @noticia.Fecha.ToString("dd/MM/yyyy")</p>
                     }
                     else
                     {
-                        @noticia.Resumen
-                    } <span class="glyphicon glyphicon-calendar" /> @noticia.Fecha.ToString("dd/MM/yyyy")
+                        <p>@noticia.Resumen <span class="glyphicon glyphicon-calendar" /> @noticia.Fecha.ToString("dd/MM/yyyy")</p>
+                    }
+                    <p class="categoria"><span class="glyphicon glyphicon-bookmark" /> @noticia.Categoria</p>
                 </li>
                 <li> <a href="/Noticias/Votation/@noticia.Id?value=true"><span class="glyphicon glyphicon-thumbs-up" /></a> @noticia.Like - <a href="/Noticias/Votation/@noticia.Id?value=false"><span class="glyphicon glyphicon-thumbs-down" /></a> @noticia.Dislike</li>
                 <li>

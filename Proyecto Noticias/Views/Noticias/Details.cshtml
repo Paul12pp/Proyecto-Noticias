@@ -1,60 +1,67 @@
 ﻿@model Proyecto_Noticias.Models.Noticia
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalle - " + Model.Titulo;
 }
 
 <div>
-        <h2 class="titnot">
-            @Html.DisplayFor(model => model.Titulo)
-        </h2>
-        <div>
+    <h2 class="titnot">
+        @Html.DisplayFor(model => model.Titulo)
+    </h2>
+    <div class="row">
+        <div class="col-md-5">
             <span class="glyphicon glyphicon-calendar" />
             @Model.Fecha.ToString("dd/MM/yyyy")
         </div>
-        <p>
-            @Html.DisplayFor(model => model.Resumen)
-        </p>
-        <p class="estilo_url">
-            <a href="@Html.DisplayFor(model => model.Url)">Fuente externa</a>
-        </p>
-        <div class="box-likes">
-            <span class="glyphicon glyphicon-thumbs-up" /> @Html.DisplayFor(model => model.Like) <span class="glyphicon glyphicon-thumbs-down" /> @Html.DisplayFor(model => model.Dislike)
+        <div class="col-auto text-right">
+            <a asp-action="Delete" asp-controller="Noticias" asp-route-id="@Model.Id"><span class="glyphicon glyphicon-remove" /></a>
+            <a asp-action="Edit" asp-controller="Noticias" asp-route-id="@Model.Id"><span class="glyphicon glyphicon-pencil" /></a>
         </div>
-        <h5><b>@Html.DisplayNameFor(model => model.Comentarios)</b></h5>
-            <div id="comentarios" class="comentarios_style">
-                @foreach (var comentario in Model.Comentarios)
-                {
-                    <button type="button" class="close" aria-label="Close">
-                        <a href="/Noticias/DeleteComentario/@comentario.Id?noticia=@comentario.NoticiaId"><span aria-hidden="true">&times;</span></a>
-                    </button>
-                    <h6><b>@comentario.Nombre</b> @comentario.Fecha.ToString("dd/MM/yyyy")</h6>
-                    <p>"@comentario.Descripcion"</p>
-                    <hr />
-                }
+    </div>
+    
+    <p>
+        @Html.DisplayFor(model => model.Resumen)
+    </p>
+    <p class="estilo_url">
+        <a href="@Html.DisplayFor(model => model.Url)" target="_blank">Fuente externa</a>
+    </p>
+    <div class="box-likes">
+        <span class="glyphicon glyphicon-thumbs-up" /> @Html.DisplayFor(model => model.Like) <span class="glyphicon glyphicon-thumbs-down" /> @Html.DisplayFor(model => model.Dislike)
+    </div>
+    <h5><b>@Html.DisplayNameFor(model => model.Comentarios)</b></h5>
+    <div id="comentarios" class="comentarios_style">
+        @foreach (var comentario in Model.Comentarios)
+        {
+            <button type="button" class="close" aria-label="Close">
+                <a href="/Noticias/DeleteComentario/@comentario.Id?noticia=@comentario.NoticiaId"><span aria-hidden="true">&times;</span></a>
+            </button>
+            <h6><b>@comentario.Nombre</b> @comentario.Fecha.ToString("dd/MM/yyyy")</h6>
+            <p>"@comentario.Descripcion"</p>
+            <hr />
+        }
+    </div>
+    <div class="box_comentar">
+        <h5><b>Deja tu comentario</b></h5>
+        <form method="post" action="/Noticias/AddComentario" class="formulario_comentario">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" name="Nombre" class="form-control" />
             </div>
-        <div class="box_comentar">
-            <h5><b>Deja tu comentario</b></h5>
-            <form method="post" action="/Noticias/AddComentario" class="formulario_comentario">
-                <div class="form-group">
-                    <label>Nombre</label>
-                    <input type="text" name="Nombre" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label>Correo</label>
-                    <input type="email" name="Correo" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label>Comentario</label>
-                    <textarea name="Descripcion" class="form-control"></textarea>
-                </div>
-                <input name="NoticiaId" value="@Model.Id" hidden/>
-                <input name="Fecha" value="@DateTime.Now" hidden/>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Comentar</button>
-                </div>
-            </form>
-        </div>
+            <div class="form-group">
+                <label>Correo</label>
+                <input type="email" name="Correo" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Comentario</label>
+                <textarea name="Descripcion" class="form-control"></textarea>
+            </div>
+            <input name="NoticiaId" value="@Model.Id" hidden />
+            <input name="Fecha" value="@DateTime.Now" hidden />
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Comentar</button>
+            </div>
+        </form>
+    </div>
 </div>
 @*<div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>

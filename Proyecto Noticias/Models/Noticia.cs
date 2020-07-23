@@ -14,6 +14,7 @@ namespace Proyecto_Noticias.Models
         public int Like { get; set; }
         public int Dislike { get; set; }
         public DateTime Fecha { get; set; }
+        public string Categoria { get; set; }
 
         public List<Comentario> Comentarios { get; set; }
 
