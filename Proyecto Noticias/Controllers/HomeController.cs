@@ -24,7 +24,7 @@ namespace Proyecto_Noticias.Controllers
         }
         public IActionResult Index()
         {
-            var noticias = _noticia.GetAllNoticias().OrderByDescending(x => x.Fecha);
+            var noticias = _noticia.GetAllNoticias();
             foreach (var noticia in noticias)
             {
                 noticia.Comentarios = _comentario.GetComentariosByNoticia(noticia.Id).ToList();

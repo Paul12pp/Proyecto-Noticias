@@ -32,7 +32,7 @@ namespace Proyecto_Noticias.Interface
         public IEnumerable<Comentario> GetComentariosByNoticia(int noticiaId)
         {
             return _appDbContext.Comentarios
-                .Where(x => x.IdNoticia == noticiaId)
+                .Where(x => x.NoticiaId == noticiaId)
                 .ToList();
         }
 

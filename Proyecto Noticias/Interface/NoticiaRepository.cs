@@ -39,7 +39,7 @@ namespace Proyecto_Noticias.Interface
                 if (noticia != null)
                 {
                     var comentarios = _appDbContext.Comentarios
-                        .Where(c => c.IdNoticia == noticiaId)
+                        .Where(c => c.NoticiaId == noticiaId)
                         .ToList();
                     if(comentarios!=null)
                         _appDbContext.Comentarios
@@ -57,7 +57,7 @@ namespace Proyecto_Noticias.Interface
 
         public IEnumerable<Noticia> GetAllNoticias()
         {
-            return _appDbContext.Noticias.ToList();
+            return _appDbContext.Noticias.ToList().OrderByDescending(r=>r.Fecha);
         }
 
         public Noticia GetNoticiaById(int noticiaId)

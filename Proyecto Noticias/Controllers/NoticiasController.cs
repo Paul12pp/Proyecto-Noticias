@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Proyecto_Noticias.Data;
 using Proyecto_Noticias.Interface;
 using Proyecto_Noticias.Models;
+using Proyecto_Noticias.ViewModels;
 
 namespace Proyecto_Noticias.Controllers
 {
@@ -16,18 +17,29 @@ namespace Proyecto_Noticias.Controllers
         private readonly IComentario _comentario;
         private readonly INoticia _noticia;
 
+        public bool ModelIsValid { get; private set; }
+
         public NoticiasController(INoticia noticia, IComentario comentario)
         {
             _comentario = comentario;
             _noticia = noticia;
         }
 
-        // GET: Noticias
-        //public async Task<IActionResult> Index()
-        //{
+        //GET: Noticias
+        public async Task<IActionResult> Index()
+        {
 
-        //    return View(await _context.Noticias.ToListAsync());
-        //}
+            var noticias = _noticia.GetAllNoticias();
+            foreach (var noticia in noticias)
+            {
+                noticia.Comentarios = _comentario.GetComentariosByNoticia(noticia.Id).ToList();
+            }
+            var viewModel = new HomeViewModel()
+            {
+                Noticias = new List<Noticia>(noticias)
+            };
+            return View(viewModel);
+        }
 
         // GET: Noticias/Details/5
         public IActionResult Details(int? id)
@@ -119,7 +131,7 @@ namespace Proyecto_Noticias.Controllers
         }
 
         // GET: Noticias/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -147,6 +159,56 @@ namespace Proyecto_Noticias.Controllers
         private bool NoticiaExists(int id)
         {
             return _noticia.GetNoticiaById(id) != null;
+        }
+
+        public IActionResult Search(string value)
+        {
+            var result = _noticia.SearchNoticia(value);
+            foreach (var noticia in result)
+            {
+                noticia.Comentarios = _comentario.GetComentariosByNoticia(noticia.Id).ToList();
+            }
+            var viewModel = new HomeViewModel()
+            {
+                Noticias = new List<Noticia>(result)
+            };
+            return View("Index", viewModel);
+        }
+
+        public IActionResult Votation(int id, bool value)
+        {
+            var result = _noticia.Votacion(id, value);
+            if (result == 200)
+            {
+                return Redirect("/Noticias");
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        public IActionResult AddComentario(Comentario model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _comentario.AddComentario(model);
+
+                if (result == 200)
+                {
+                    return Redirect($"/Noticias/Details/{model.NoticiaId}");
+                }
+                return Redirect($"/Noticias/Details/{model.NoticiaId}");
+            }
+            return Redirect($"/Noticias/Details/{model.NoticiaId}");
+        }
+
+        public IActionResult DeleteComentario(int id,int noticia)
+        {
+            var result = _comentario.DeleteComentario(id);
+            if (result == 200)
+            {
+                return Redirect($"/Noticias/Details/{noticia}");
+            }
+            return NotFound();
         }
     }
 }

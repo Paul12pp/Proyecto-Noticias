@@ -20,7 +20,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Resumen" class="control-label"></label>
-                <input asp-for="Resumen" class="form-control" />
+                @*<input asp-for="Resumen" class="form-control" />*@
+                <textarea asp-for="Resumen" class="form-control"></textarea>
                 <span asp-validation-for="Resumen" class="text-danger"></span>
             </div>
             <div class="form-group">

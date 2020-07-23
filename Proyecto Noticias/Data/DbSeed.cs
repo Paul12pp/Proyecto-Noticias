@@ -106,7 +106,7 @@ namespace Proyecto_Noticias.Data
                     Correo="juan@p.com",
                     Descripcion="Muy bueno eso",
                     Fecha= new DateTime(),
-                    IdNoticia=1
+                    NoticiaId=1
                 },
                 new Comentario
                 {
@@ -114,7 +114,7 @@ namespace Proyecto_Noticias.Data
                     Correo="pedro@j.com",
                     Descripcion="Me gusto",
                     Fecha= new DateTime(),
-                    IdNoticia=2
+                    NoticiaId=2
                 },
                 new Comentario
                 {
@@ -122,7 +122,7 @@ namespace Proyecto_Noticias.Data
                     Correo="maria@l.com",
                     Descripcion="JJJ, que loco",
                     Fecha= new DateTime(),
-                    IdNoticia=1
+                    NoticiaId=1
                 },
                 new Comentario
                 {
@@ -130,7 +130,7 @@ namespace Proyecto_Noticias.Data
                     Correo="josefaa@m.com",
                     Descripcion="Excelente",
                     Fecha= new DateTime(),
-                    IdNoticia=2
+                    NoticiaId=2
                 },
                 new Comentario
                 {
@@ -138,7 +138,7 @@ namespace Proyecto_Noticias.Data
                     Correo="Luis@j.com",
                     Descripcion="Basura",
                     Fecha= new DateTime(),
-                    IdNoticia=3
+                    NoticiaId=3
                 },
             });
             context.SaveChanges();

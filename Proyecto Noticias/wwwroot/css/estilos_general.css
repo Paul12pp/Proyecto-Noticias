@@ -9,6 +9,9 @@ ul.noticia {
     padding: 0;
     
 }
+div.box_noticias{
+    width:50%;
+}
 
 li.estilo01 {
     text-align: left;
@@ -65,6 +68,7 @@ li.estilo02 {
     font-size: 16px;
     color: white;
     background-color: midnightblue;
+    bottom:0;
 }
 
 .navBar01 {
@@ -82,4 +86,28 @@ dt {
     color: midnightblue;
     font-style: italic;
     text-decoration: underline;
+}
+
+.comentarios_style {
+    margin-left:20px;
+}
+
+div.box_comentar{
+    /*background-color:blue;*/
+    padding:5px;
+}
+
+form.formulario_comentario {
+    border-style:solid;
+    border-width:1px;
+    border-radius:30px;
+    border-color:antiquewhite;
+    /*background-color: red;*/
+    margin-bottom:10px;
+    padding:10px;
+    width:50%;
+}
+
+h5.error{
+    color:red;
 }

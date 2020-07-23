@@ -4,60 +4,58 @@
     ViewData["Title"] = "Details";
 }
 
-<p  class="titnot02">Detalles</p>
-
 <div>
-    <p class="titnot03">Noticia</p>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-           @* @Html.DisplayNameFor(model => model.Titulo)*@
-        </dt>
-        <dd class="titnot">
+        <h2 class="titnot">
             @Html.DisplayFor(model => model.Titulo)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Resumen)
-        </dt>
-        <dd>
+        </h2>
+        <div>
+            <span class="glyphicon glyphicon-calendar" />
+            @Model.Fecha.ToString("dd/MM/yyyy")
+        </div>
+        <p>
             @Html.DisplayFor(model => model.Resumen)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Url)
-        </dt>
-        <dd class="estilo_url">
-            @Html.DisplayFor(model => model.Url)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Like)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Like)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Dislike)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Dislike)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Fecha)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Fecha)
-        </dd>
-        <dt>@Html.DisplayNameFor(model => model.Comentarios)</dt>
-        <dt>
-            <ul>
+        </p>
+        <p class="estilo_url">
+            <a href="@Html.DisplayFor(model => model.Url)">Fuente externa</a>
+        </p>
+        <div class="box-likes">
+            <span class="glyphicon glyphicon-thumbs-up" /> @Html.DisplayFor(model => model.Like) <span class="glyphicon glyphicon-thumbs-down" /> @Html.DisplayFor(model => model.Dislike)
+        </div>
+        <h5><b>@Html.DisplayNameFor(model => model.Comentarios)</b></h5>
+            <div id="comentarios" class="comentarios_style">
                 @foreach (var comentario in Model.Comentarios)
                 {
-                    <li>@comentario.Descripcion</li>
+                    <button type="button" class="close" aria-label="Close">
+                        <a href="/Noticias/DeleteComentario/@comentario.Id?noticia=@comentario.NoticiaId"><span aria-hidden="true">&times;</span></a>
+                    </button>
+                    <h6><b>@comentario.Nombre</b> @comentario.Fecha.ToString("dd/MM/yyyy")</h6>
+                    <p>"@comentario.Descripcion"</p>
+                    <hr />
                 }
-            </ul>
-        </dt>
-    </dl>
+            </div>
+        <div class="box_comentar">
+            <h5><b>Deja tu comentario</b></h5>
+            <form method="post" action="/Noticias/AddComentario" class="formulario_comentario">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" name="Nombre" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Correo</label>
+                    <input type="email" name="Correo" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Comentario</label>
+                    <textarea name="Descripcion" class="form-control"></textarea>
+                </div>
+                <input name="NoticiaId" value="@Model.Id" hidden/>
+                <input name="Fecha" value="@DateTime.Now" hidden/>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Comentar</button>
+                </div>
+            </form>
+        </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+@*<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+</div>*@
