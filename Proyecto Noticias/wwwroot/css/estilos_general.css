@@ -34,6 +34,26 @@ li.estilo02 {
     font-style: oblique;
 }
 
+/*Titulo de noticia en pagina Details*/
+.titnot02 {
+    margin-top: 15px;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+    padding-top: 10px;
+    font-size: 18px;
+    color: darkblue;
+}
+
+.titnot03 {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    padding-top: 5px;
+    font-size: 16px;
+    color: darkblue;
+}
+
+
 
 /*Footer estilos*/
 
@@ -49,4 +69,17 @@ li.estilo02 {
 
 .navBar01 {
     background-color: midnightblue;
+}
+
+
+dt {
+    color: midnightblue;
+    font-style: oblique;
+
+}
+
+.estilo_url {
+    color: midnightblue;
+    font-style: italic;
+    text-decoration: underline;
 }

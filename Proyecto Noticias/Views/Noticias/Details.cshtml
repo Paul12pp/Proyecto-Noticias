@@ -4,16 +4,16 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<p  class="titnot02">Detalles</p>
 
 <div>
-    <h4>Noticia</h4>
+    <p class="titnot03">Noticia</p>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Titulo)
+           @* @Html.DisplayNameFor(model => model.Titulo)*@
         </dt>
-        <dd>
+        <dd class="titnot">
             @Html.DisplayFor(model => model.Titulo)
         </dd>
         <dt>
@@ -25,7 +25,7 @@
         <dt>
             @Html.DisplayNameFor(model => model.Url)
         </dt>
-        <dd>
+        <dd class="estilo_url">
             @Html.DisplayFor(model => model.Url)
         </dd>
         <dt>
