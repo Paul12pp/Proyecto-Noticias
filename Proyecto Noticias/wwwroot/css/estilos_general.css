@@ -1,0 +1,52 @@
+﻿body {
+}
+
+/*Estilo tabla noticia*/
+
+ul.noticia {
+    list-style-type: none;
+    margin: 30px 10px 10px 10px;
+    padding: 0;
+    
+}
+
+li.estilo01 {
+    text-align: left;
+    font-size: 20px;
+    color: darkblue;
+}
+
+li.estilo02 {
+    text-align: left;
+    font-size: 14px;
+}
+
+
+/*Titulo de noticia*/
+
+.titnot {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: 32px;
+    color: darkblue;
+    font-style: oblique;
+}
+
+
+/*Footer estilos*/
+
+.footer01 {
+    font-style: oblique;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 10px 10px 10px 10px;
+    font-size: 16px;
+    color: white;
+    background-color: midnightblue;
+}
+
+.navBar01 {
+    background-color: midnightblue;
+}

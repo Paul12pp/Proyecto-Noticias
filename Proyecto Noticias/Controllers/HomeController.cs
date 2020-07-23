@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Proyecto_Noticias.Data;
 using Proyecto_Noticias.Interface;
 using Proyecto_Noticias.Models;
+using Proyecto_Noticias.ViewModels;
 
 namespace Proyecto_Noticias.Controllers
 {
@@ -23,9 +24,16 @@ namespace Proyecto_Noticias.Controllers
         }
         public IActionResult Index()
         {
-            // prueba de la interfaces
-            var noticia = _noticia.GetAllNoticias();
-            return View();
+            var noticias = _noticia.GetAllNoticias().OrderByDescending(x => x.Fecha);
+            foreach (var noticia in noticias)
+            {
+                noticia.Comentarios = _comentario.GetComentariosByNoticia(noticia.Id).ToList();
+            }
+            var viewModel = new HomeViewModel()
+            {
+                Noticias = new List<Noticia>(noticias)
+            };
+            return View(viewModel);
         }
 
         public IActionResult About()
