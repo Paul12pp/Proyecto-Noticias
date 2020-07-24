@@ -9,7 +9,7 @@
     <div><p class="titnot">Lo Más Actualizado <a asp-action="Create" asp-controller="Noticias"><span class="glyphicon glyphicon-plus" /></a></p> </div>
     <form class="form-inline" action="/Noticias/Search">
         <input class="form-control mr-sm-2" type="search" name="value" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
     </form>
     <div class="box_noticias">
         @if (Model.Noticias.Count() == 0)
