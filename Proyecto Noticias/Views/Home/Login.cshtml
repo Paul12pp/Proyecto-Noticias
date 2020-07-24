@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+<h2 class="titlog">@ViewData["Title"]</h2>
+
+
+
+<!DOCTYPE html>
+
+<html>
+
+<body>
+
+
+    <form action="/action_page.php" method="post">
+        
+        <div class="container">
+            <label for="uname"><b>Usuario</b></label>
+            <input type="text" placeholder="Ingrese nombre" name="uname" required>
+
+            <label for="psw"><b>Contraseña</b></label>
+            <input type="password" placeholder="Ingrese contraseña" name="psw" required>
+
+            <button type="submit">Ingresar</button>
+            <label>
+                <input type="checkbox" checked="checked" name="remember"> Recuerdame
+            </label>
+        </div>
+
+        <div class="container">
+            <button type="button" class="cancelbtn">Cancelar</button>
+            <span class="psw">Olvido <a href="#">contraseña?</a></span>
+        </div>
+    </form>
+
+</body>
+
+
+</html>

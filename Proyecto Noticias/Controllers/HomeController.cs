@@ -43,6 +43,13 @@ namespace Proyecto_Noticias.Controllers
             return View();
         }
 
+        public IActionResult Login()
+        {
+            ViewData["Login"] = "Your application login page.";
+
+            return View();
+        }
+
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";

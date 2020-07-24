@@ -37,6 +37,16 @@ li.estilo02 {
     font-style: oblique;
 }
 
+/*Titulo en pagina About*/
+.titlenos {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    font-size: 36px;
+    color: darkblue;
+}
+
 /*Titulo de noticia en pagina Details*/
 .titnot02 {
     margin-top: 15px;
@@ -46,6 +56,7 @@ li.estilo02 {
     font-size: 18px;
     color: darkblue;
 }
+
 
 .titnot03 {
     margin-top: 5px;
@@ -119,4 +130,57 @@ h5.error{
     padding:2px;
     display:inline;
     border-radius:10px;
+}
+
+
+/*Form login estilos*/
+
+form {
+    border: 3px solid #f1f1f1;
+    margin: -11px;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.titlog {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    padding-top: 10px;
+    font-size: 18px;
+    color: darkblue;
+}
+
+button {
+    background-color: darkblue;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: red;
+    color: white;
+}
+
+.container {
+    padding: 0px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
 }
