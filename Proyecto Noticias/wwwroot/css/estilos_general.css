@@ -135,7 +135,7 @@ h5.error{
 
 /*Form login estilos*/
 
-form {
+.formlogin {
     border: 3px solid #f1f1f1;
     margin: -11px;
 }
@@ -158,7 +158,7 @@ input[type=text], input[type=password] {
     color: darkblue;
 }
 
-button {
+.butlog {
     background-color: darkblue;
     color: white;
     padding: 14px 20px;
