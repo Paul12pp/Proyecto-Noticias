@@ -68,12 +68,12 @@ namespace Proyecto_Noticias.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Titulo,Resumen,Url,Like,Dislike,Fecha")] Noticia noticia)
+        public IActionResult Create([Bind("Id,Titulo,Resumen,Url,Like,Dislike,Categoria,Fecha")] Noticia noticia)
         {
             if (ModelState.IsValid)
             {
                 _noticia.AddNoticia(noticia);
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index","Noticias");
             }
             return View(noticia);
         }
@@ -99,33 +99,15 @@ namespace Proyecto_Noticias.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Resumen,Url,Like,Dislike,Fecha")] Noticia noticia)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Resumen,Url,Like,Dislike,Categoria,Fecha")] Noticia noticia)
         {
-            if (id != noticia.Id)
-            {
-                return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    //TODO confugrar update
-                    //_context.Update(noticia);
-                    //await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!NoticiaExists(noticia.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction("Details",id);
+                var result = _noticia.EditNoticia(id, noticia);
+                if(result==200)
+                    return Redirect($"/Noticias/Details/{id}");
+                return View(noticia);
             }
             return View(noticia);
         }

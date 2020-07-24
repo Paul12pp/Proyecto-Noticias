@@ -15,6 +15,12 @@ namespace Proyecto_Noticias.Interface
         /// <returns>devuelve 200 o 500; error o success</returns>
         int AddNoticia(Noticia model);
         /// <summary>
+        /// Edita noticia
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>devuelve 200 o 500; error o success</returns>
+        int EditNoticia(int id, Noticia model);
+        /// <summary>
         /// elimina una noticia y sus comentarios
         /// </summary>
         /// <param name="noticiaId"></param>

@@ -18,13 +18,15 @@
             <a asp-action="Edit" asp-controller="Noticias" asp-route-id="@Model.Id"><span class="glyphicon glyphicon-pencil" /></a>
         </div>
     </div>
-    
+
     <p>
         @Html.DisplayFor(model => model.Resumen)
     </p>
     <p class="estilo_url">
         <a href="@Html.DisplayFor(model => model.Url)" target="_blank">Fuente externa</a>
     </p>
+    <p class="categoria"><span class="glyphicon glyphicon-bookmark" /> @Model.Categoria</p>
+
     <div class="box-likes">
         <span class="glyphicon glyphicon-thumbs-up" /> @Html.DisplayFor(model => model.Like) <span class="glyphicon glyphicon-thumbs-down" /> @Html.DisplayFor(model => model.Dislike)
     </div>

@@ -55,6 +55,30 @@ namespace Proyecto_Noticias.Interface
             }
         }
 
+        public int EditNoticia(int id, Noticia model)
+        {
+            try
+            {
+                var noticia = _appDbContext.Noticias
+                    .FirstOrDefault(r => r.Id == id);
+                if (noticia != null)
+                {
+                    noticia.Titulo = model.Titulo;
+                    noticia.Resumen = model.Resumen;
+                    noticia.Url = model.Url;
+                    noticia.Categoria = model.Categoria;
+                    noticia.Fecha = model.Fecha;
+                    _appDbContext.SaveChanges();
+                    return 200;
+                }
+                return 500;
+            }
+            catch (Exception)
+            {
+                return 500;
+            }
+        }
+
         public IEnumerable<Noticia> GetAllNoticias()
         {
             return _appDbContext.Noticias.ToList().OrderByDescending(r=>r.Fecha);
