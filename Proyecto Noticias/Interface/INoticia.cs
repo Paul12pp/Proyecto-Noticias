@@ -30,7 +30,7 @@ namespace Proyecto_Noticias.Interface
         /// Todas las noticias
         /// </summary>
         /// <returns>listado de noticias y su cantidad de comentarios</returns>
-        IEnumerable<Noticia> GetAllNoticias();
+        IQueryable<Noticia> GetAllNoticias();
         /// <summary>
         /// Noticia por id
         /// </summary>
@@ -48,6 +48,6 @@ namespace Proyecto_Noticias.Interface
         /// </summary>
         /// <param name="value"></param>
         /// <returns>un listado de noticias que coinciden con el valor</returns>
-        IEnumerable<Noticia> SearchNoticia(string value);
+        IQueryable<Noticia> SearchNoticia(string value);
     }
 }

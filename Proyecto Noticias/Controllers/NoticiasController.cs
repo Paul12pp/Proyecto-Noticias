@@ -16,29 +16,44 @@ namespace Proyecto_Noticias.Controllers
     {
         private readonly IComentario _comentario;
         private readonly INoticia _noticia;
+        private readonly AppDbContext _context;
 
         public bool ModelIsValid { get; private set; }
 
-        public NoticiasController(INoticia noticia, IComentario comentario)
+        public NoticiasController(INoticia noticia, IComentario comentario, AppDbContext context)
         {
             _comentario = comentario;
             _noticia = noticia;
+            _context = context;
         }
 
         //GET: Noticias
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber,
+            string currentFilter,
+            string searchString)
         {
-
+            if (searchString != null)         
+                pageNumber = 1;
+            else            
+                searchString = currentFilter;
+            ViewData["CurrentFilter"] = searchString;
             var noticias = _noticia.GetAllNoticias();
-            foreach (var noticia in noticias)
+            if (!String.IsNullOrEmpty(searchString))
             {
-                noticia.Comentarios = _comentario.GetComentariosByNoticia(noticia.Id).ToList();
+                noticias = _noticia.SearchNoticia(searchString);
             }
-            var viewModel = new HomeViewModel()
-            {
-                Noticias = new List<Noticia>(noticias)
-            };
-            return View(viewModel);
+            int pageSize = 3;
+            //var astr = noticias.AsNoTracking();
+            return View(await PaginatedList<Noticia>.CreateAsync(noticias, pageNumber ?? 1, pageSize));
+            //foreach (var noticia in noticias)
+            //{
+            //    noticia.Comentarios = _comentario.GetComentariosByNoticia(noticia.Id).ToList();
+            //}
+            //var viewModel = new HomeViewModel()
+            //{
+            //    Noticias = new List<Noticia>(noticias)
+            //};
+            //return View(viewModel);
         }
 
         // GET: Noticias/Details/5

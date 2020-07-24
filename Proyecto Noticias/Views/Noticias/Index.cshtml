@@ -1,4 +1,4 @@
-﻿@model Proyecto_Noticias.ViewModels.HomeViewModel
+﻿@model Proyecto_Noticias.Models.PaginatedList<Noticia>
 @{
 
     ViewData["Title"] = "NoticiasRD";
@@ -7,17 +7,17 @@
 <div>
 
     <div><p class="titnot">Lo Más Actualizado <a asp-action="Create" asp-controller="Noticias"><span class="glyphicon glyphicon-plus" /></a></p> </div>
-    <form class="form-inline" action="/Noticias/Search">
-        <input class="form-control mr-sm-2" type="search" name="value" placeholder="Search" aria-label="Search">
+    <form class="form-inline" method="get" asp-action="Index">
+        <input class="form-control mr-sm-2" type="search" name="searchString" value="@ViewData["CurrentFilter"]" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
     </form>
     <div class="box_noticias">
-        @if (Model.Noticias.Count() == 0)
+        @if (Model.Count() == 0)
         {
             <p>No se encontraron coincidencias.</p>
         }
     </div>
-    @foreach (var noticia in Model.Noticias)
+    @foreach (var noticia in Model)
     {
         <div class="box_noticias">
             <ul class="noticia">
@@ -41,8 +41,25 @@
                         Comentarios @noticia.Comentarios.Count
                     </a>
                 </li>
-                <hr/>
+                <hr />
             </ul>
         </div>
     }
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+
+    <a asp-action="Index"
+       asp-route-pageNumber="@(Model.PageIndex - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @prevDisabled">
+        Atrás
+    </a>
+    <a asp-action="Index"
+       asp-route-pageNumber="@(Model.PageIndex + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @nextDisabled">
+        Siguiente
+    </a>
 </div>

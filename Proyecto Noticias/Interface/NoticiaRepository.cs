@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Proyecto_Noticias.Data;
 using Proyecto_Noticias.Models;
 
@@ -79,9 +80,17 @@ namespace Proyecto_Noticias.Interface
             }
         }
 
-        public IEnumerable<Noticia> GetAllNoticias()
+        public IQueryable<Noticia> GetAllNoticias()
         {
-            return _appDbContext.Noticias.ToList().OrderByDescending(r=>r.Fecha);
+            var filterData = from s in _appDbContext.Noticias
+                             select s;
+            foreach (var item in filterData)
+            {
+                item.Comentarios = _appDbContext.Comentarios
+                .Where(x => x.NoticiaId == item.Id)
+                .ToList();
+            }
+            return filterData.OrderByDescending(r=>r.Fecha);
         }
 
         public Noticia GetNoticiaById(int noticiaId)
@@ -90,12 +99,23 @@ namespace Proyecto_Noticias.Interface
                 .FirstOrDefault(n => n.Id == noticiaId);
         }
 
-        public IEnumerable<Noticia> SearchNoticia(string value)
+        public IQueryable<Noticia> SearchNoticia(string value)
         {
-            var filterData = _appDbContext.Noticias
-                .Where(x => x.Resumen.Contains(value) || x.Titulo.Contains(value))
+            //var filterData = _appDbContext.Noticias
+                //.Where(x => x.Resumen.Contains(value) || x.Titulo.Contains(value))
+                //.ToList();
+            var filterData = from s in _appDbContext.Noticias
+                      select s;
+            foreach (var item in filterData)
+            {
+                item.Comentarios = _appDbContext.Comentarios
+                .Where(x => x.NoticiaId == item.Id)
                 .ToList();
-            return filterData;
+            }
+            
+            return filterData
+                .Where(x => x.Resumen.Contains(value) || x.Titulo.Contains(value))
+                .OrderByDescending(r=>r.Fecha);
         }
 
         public int Votacion(int noticiaId,bool value)
