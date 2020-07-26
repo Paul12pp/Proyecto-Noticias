@@ -57,13 +57,13 @@ namespace Proyecto_Noticias.Controllers
         }
 
         // GET: Noticias/Details/5
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            var noticia = _noticia.GetNoticiaById(id.Value);
+            var noticia =  _noticia.GetNoticiaById(id.Value);
             if (noticia == null)
             {
                 return NotFound();
@@ -150,7 +150,7 @@ namespace Proyecto_Noticias.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             _noticia.DeleteNoticia(id);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Noticias");
         }
 
         private bool NoticiaExists(int id)
